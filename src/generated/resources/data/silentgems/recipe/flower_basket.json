@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:sugar_cane"
+      },
+      {
+        "item": "minecraft:bamboo"
+      }
+    ],
+    "/": {
+      "tag": "c:nuggets/gold"
+    },
+    "g": {
+      "tag": "silentgems:glowroses"
+    },
+    "~": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "/~/",
+    "#g#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "silentgems:flower_basket"
+  }
+}

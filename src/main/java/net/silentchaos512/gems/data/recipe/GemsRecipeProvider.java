@@ -3,6 +3,7 @@ package net.silentchaos512.gems.data.recipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -294,6 +295,28 @@ public class GemsRecipeProvider extends LibRecipeProvider {
                 .define('#', Tags.Items.LEATHERS)
                 .define('g', GemsTags.Items.GEMS)
                 .unlockedBy("has_item", has(GemsTags.Items.GEMS))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, GemsItems.GEM_BAG)
+                .pattern("/~/")
+                .pattern("#g#")
+                .pattern("###")
+                .define('~', Tags.Items.STRINGS)
+                .define('/', Tags.Items.NUGGETS_GOLD)
+                .define('#', ItemTags.WOOL)
+                .define('g', Tags.Items.GEMS)
+                .unlockedBy("has_item", has(Tags.Items.GEMS))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, GemsItems.FLOWER_BASKET)
+                .pattern("/~/")
+                .pattern("#g#")
+                .pattern("###")
+                .define('~', Tags.Items.STRINGS)
+                .define('/', Tags.Items.NUGGETS_GOLD)
+                .define('#', Ingredient.of(Items.SUGAR_CANE, Items.BAMBOO))
+                .define('g', GemsTags.Items.GLOWROSES)
+                .unlockedBy("has_item", has(GemsTags.Items.GLOWROSES))
                 .save(consumer);
     }
 }

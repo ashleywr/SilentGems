@@ -13,6 +13,8 @@ import net.silentchaos512.gems.item.GemsFoodItem;
 import net.silentchaos512.gems.item.PetSummonerItem;
 import net.silentchaos512.gems.item.SparklingBoneMealItem;
 import net.silentchaos512.gems.item.TeleporterLinker;
+import net.silentchaos512.gems.item.container.FlowerBasketItem;
+import net.silentchaos512.gems.item.container.GemBagItem;
 import net.silentchaos512.gems.util.Gems;
 
 import javax.annotation.Nullable;
@@ -49,6 +51,11 @@ public final class GemsItems {
             new PetSummonerItem(PetSummonerItem::getCat, baseProps()));
     public static final DeferredItem<PetSummonerItem> SUMMON_PUPPY = registerSimpleModel("summon_puppy", () ->
             new PetSummonerItem(PetSummonerItem::getDog, baseProps()));
+
+    public static final DeferredItem<GemBagItem> GEM_BAG = registerSimpleModel("gem_bag", () ->
+            new GemBagItem(unstackableProps()));
+    public static final DeferredItem<FlowerBasketItem> FLOWER_BASKET = registerSimpleModel("flower_basket", () ->
+            new FlowerBasketItem(unstackableProps()));
 
     public static final DeferredItem<Item> POTATO_ON_A_STICK = registerFood("potato_on_a_stick", Items.STICK, new FoodProperties.Builder()
             .nutrition(6)

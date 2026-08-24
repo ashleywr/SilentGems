@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "minecraft:wool"
+    },
+    "/": {
+      "tag": "c:nuggets/gold"
+    },
+    "g": {
+      "tag": "c:gems"
+    },
+    "~": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "/~/",
+    "#g#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "silentgems:gem_bag"
+  }
+}
