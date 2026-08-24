@@ -45,6 +45,10 @@ public final class DataGenerators {
             generator.addProvider(true, new GemsMaterialsProvider(generator));
         }
 
+        if (ModList.get().isLoaded("curios")) {
+            generator.addProvider(true, new GemsCuriosDataProvider(packOutput, existingFileHelper, lookupProvider));
+        }
+
         generator.addProvider(true, new GemsBlockStateProvider(generator, existingFileHelper));
         generator.addProvider(true, new GemsItemModelProvider(generator, existingFileHelper));
 

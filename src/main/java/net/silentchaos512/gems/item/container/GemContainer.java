@@ -11,20 +11,31 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.fml.ModList;
+import net.silentchaos512.gems.compat.CuriosCompat;
 
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
 public class GemContainer extends AbstractContainerMenu {
     private final ItemStack item;
+    private final boolean itemIsCurio;
     private final Container container;
     private final Class<? extends IContainerItem> containerItemClass;
     private int blocked = -1;
 
     public <T extends Item & IContainerItem> GemContainer(int id, Inventory playerInventory, MenuType<?> containerType, Class<T> containerItemClass) {
         super(containerType, id);
-        this.item = getHeldContainerItem(playerInventory.player, containerItemClass);
         this.containerItemClass = containerItemClass;
+
+        ItemStack held = getHeldContainerItem(playerInventory.player, containerItemClass);
+        if (held.isEmpty() && ModList.get().isLoaded("curios")) {
+            held = CuriosCompat.findEquipped(playerInventory.player, containerItemClass);
+            this.itemIsCurio = !held.isEmpty();
+        } else {
+            this.itemIsCurio = false;
+        }
+        this.item = held;
 
         T containerItem = containerItemClass.cast(this.item.getItem());
         NonNullList<ItemStack> items = containerItem.getItems(this.item);
@@ -147,6 +158,10 @@ public class GemContainer extends AbstractContainerMenu {
                 items.set(i, this.container.getItem(i));
             }
             containerItemClass.cast(item.getItem()).saveItems(item, items);
+
+            if (itemIsCurio) {
+                CuriosCompat.saveEquipped(playerIn, containerItemClass, item);
+            }
         }
     }
 

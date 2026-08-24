@@ -1,10 +1,15 @@
 package net.silentchaos512.gems.data;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -15,6 +20,8 @@ import net.silentchaos512.gems.setup.GemsTags;
 import net.silentchaos512.gems.util.Gems;
 
 public class GemsItemTagsProvider extends ItemTagsProvider {
+    private static final TagKey<Item> CURIOS_CHARM = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("curios", "charm"));
+
     public GemsItemTagsProvider(GatherDataEvent event, BlockTagsProvider blocks) {
         super(event.getGenerator().getPackOutput(), event.getLookupProvider(), blocks.contentsGetter(), SilentGems.MOD_ID, event.getExistingFileHelper());
     }
@@ -63,5 +70,9 @@ public class GemsItemTagsProvider extends ItemTagsProvider {
         tag(GemsTags.Items.STEW_MEAT).add(Items.BEEF, Items.CHICKEN, Items.MUTTON, Items.PORKCHOP, Items.RABBIT);
 
         copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
+
+        if (ModList.get().isLoaded("curios")) {
+            tag(CURIOS_CHARM).add(GemsItems.GEM_BAG.get(), GemsItems.FLOWER_BASKET.get());
+        }
     }
 }

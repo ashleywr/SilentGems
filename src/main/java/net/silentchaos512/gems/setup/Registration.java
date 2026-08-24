@@ -8,6 +8,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.silentchaos512.gems.SilentGems;
+import net.silentchaos512.gems.compat.CuriosCompat;
 
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -27,6 +28,10 @@ public class Registration {
 
         if (ModList.get().isLoaded("silentgear")) {
             GemsTraits.EffectTypes.REGISTRAR.register(modEventBus);
+        }
+
+        if (ModList.get().isLoaded("curios")) {
+            modEventBus.addListener(CuriosCompat::registerCapabilities);
         }
     }
 

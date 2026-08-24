@@ -8,10 +8,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.silentchaos512.gems.SilentGems;
+import net.silentchaos512.gems.compat.CuriosCompat;
 
 @EventBusSubscriber(modid = SilentGems.MOD_ID)
 public final class ContainerItemEvents {
@@ -32,6 +34,18 @@ public final class ContainerItemEvents {
             if (invStack.getItem() instanceof IContainerItem containerItem && containerItem.canStore(itemOnGround)) {
                 insertIntoContainer(containerItem, invStack, itemOnGround);
             }
+        }
+
+        if (!itemOnGround.isEmpty() && ModList.get().isLoaded("curios")) {
+            CuriosCompat.forEachEquipped(player, (slotResult, stack) -> {
+                if (stack.getItem() instanceof IContainerItem containerItem && containerItem.canStore(itemOnGround)) {
+                    NonNullList<ItemStack> items = containerItem.getItems(stack);
+                    if (tryInsert(items, itemOnGround)) {
+                        containerItem.saveItems(stack, items);
+                        CuriosCompat.saveEquipped(player, slotResult, stack);
+                    }
+                }
+            });
         }
 
         if (itemOnGround.getCount() != initialCount) {
