@@ -39,7 +39,7 @@ Major version updates intentionally break compatibility with older versions to r
 
 <!-- ashley-release-information -->
 
-## Ashley's builds
+## My builds
 
 This is an unofficial maintenance fork. Original authors retain ownership and credit. See the [upstream project](https://github.com/SilentChaos512/SilentGems) for the original mod. Local changes do not imply upstream endorsement.
 
